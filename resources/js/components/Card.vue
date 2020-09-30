@@ -2,8 +2,16 @@
 
     <div v-if="filters.length > 0" class="bg-30 border-b border-60">
         <scroll-wrap :height="card.filterMaxHeight ? card.filterMaxHeight : 350">
+        
             <div v-if="! card.filterHideTitle" class="py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none">
                 {{this.card.filterMenuTitle ? this.card.filterMenuTitle : 'Filter Menu'}}
+            </div>
+            <div class="toolbar py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none" >
+               <button
+                  v-on:click="isHidden = !isHidden"
+                  class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
+                {{this.isHidden ? this.isHidden : 'Close'}}
+              </button>
             </div>
             <div v-if="filtersAreApplied" class="bg-30 border-b border-60 text-center py-2">
             <button
@@ -11,11 +19,6 @@
             class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
             {{ __('Reset Filters') }}
             </button>
-              <button
-                  v-on:click="isHidden = !isHidden"
-                  class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
-                {{this.card.filterMenuTitle ? this.card.filterMenuTitle : 'Filter Menu'}}
-              </button>
             </div>
 
             <!-- Custom Filters -->
