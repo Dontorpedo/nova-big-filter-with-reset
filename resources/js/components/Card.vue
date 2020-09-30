@@ -10,11 +10,16 @@
             class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
             {{ __('Reset Filters') }}
             </button>
+              <button
+                  v-on:click="isHidden = !isHidden"
+                  class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
+                {{this.card.filterMenuTitle ? this.card.filterMenuTitle : 'Filter Menu'}}
+              </button>
             </div>
 
             <!-- Custom Filters -->
-            <div v-for="filters in this.filterRows">
-                <div class="float-left nova-big-filter-col">
+            <div v-if="!isHidden" v-for="filters in this.filterRows">
+                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[0]"
                             :resource-name="resourceName"
@@ -25,7 +30,7 @@
                             @change="$emit('filter-changed')"
                     />
                 </div>
-                <div class="float-left nova-big-filter-col">
+                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[1]"
                             :resource-name="resourceName"
@@ -36,7 +41,7 @@
                             @change="$emit('filter-changed')"
                     />
                 </div>
-                <div class="float-left nova-big-filter-col">
+                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[2]"
                             :resource-name="resourceName"
@@ -82,8 +87,13 @@
                 filterHideTitle: {
                     type: Boolean,
                     default: false
-                }
+                },
+              filterExclude: {
+                type: Boolean,
+                default: false
+              }
             },
+            isHidden: true,
             resourceName: String,
             softDeletes: Boolean,
             viaResource: String,
