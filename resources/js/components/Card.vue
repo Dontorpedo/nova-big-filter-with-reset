@@ -8,22 +8,21 @@
             </div>
             <div class="toolbar py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none" >
                <button
-                  v-on:click="isHidden = !isHidden"
+                   @click='isHidden = !isHidden'
                   class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
-                {{this.isHidden ? this.isHidden : 'Close'}}
+                {{isHidden ? __('Filter close') : __('Filter open')}}
               </button>
-            </div>
-            <div v-if="filtersAreApplied" class="bg-30 border-b border-60 text-center py-2">
-            <button
-            @click="resetFilters()"
-            class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
-            {{ __('Reset Filters') }}
-            </button>
+              <button
+                  v-if="filtersAreApplied"
+                  @click="resetFilters()"
+                  class="py-2 px-2 uppercase tracking-wide text-xs text-80 dim text-center bg-blue-500 hover:bg-blue-700 text-white font-bold rounded">
+                {{ __('Reset Filters') }}
+              </button>
             </div>
 
             <!-- Custom Filters -->
-            <div v-if="!isHidden" v-for="filters in this.filterRows">
-                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
+            <div v-show="isHidden" v-for="filters in this.filterRows">
+                <div class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[0]"
                             :resource-name="resourceName"
@@ -34,7 +33,7 @@
                             @change="$emit('filter-changed')"
                     />
                 </div>
-                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
+                <div class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[1]"
                             :resource-name="resourceName"
@@ -45,7 +44,7 @@
                             @change="$emit('filter-changed')"
                     />
                 </div>
-                <div v-if="this.filterExclude === 0" class="float-left nova-big-filter-col">
+                <div  class="float-left nova-big-filter-col">
                     <component
                             v-if="filters[2]"
                             :resource-name="resourceName"
@@ -130,6 +129,7 @@
             perPageChanged(event) {
                 this.$emit('per-page-changed', event.target.value)
             }
+
         },
 
         computed: {
@@ -170,3 +170,4 @@
 <style>
     .bg-blue-500{background-color: #4299e1;}
 </style>
+
