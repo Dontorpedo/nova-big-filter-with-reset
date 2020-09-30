@@ -1,3 +1,6 @@
+Just added Show/hide
+
+
 ## Laravel Nova Big Filter
 [![Latest Version on Github](https://img.shields.io/packagist/v/keops007/nova-big-filter-with-reset.svg?style=flat)](https://packagist.org/packages/keops007/nova-big-filter-with-reset)
 [![Total Downloads](https://img.shields.io/packagist/dt/keops007/nova-big-filter-with-reset.svg?style=flat)](https://packagist.org/packages/keops007/nova-big-filter-with-reset)
